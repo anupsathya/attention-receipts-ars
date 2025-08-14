@@ -206,49 +206,69 @@ app.post('/api/print-receipt', async (req, res) => {
 {comment: Your data has been sold to the highest bidder}
 
 ${dateStr} | ${timeStr}
+
 Tracking ID: ${trackingId}
 Session Duration: ${Math.floor(Math.random() * 120) + 30}min
+
 ---
 ^^^SURVEILLANCE DATA COLLECTED
+
 ${newsItem.title}
 ${newsItem.source} | ${newsItem.category}
+
 ---
 ^^^BEHAVIORAL PATTERN ANALYSIS
+
 ${action === 'save' ? 'ENGAGEMENT' : 'REJECTION'} | ${newsItem.category}
 Interaction Type: ${action === 'save' ? 'Positive' : 'Negative'}
 Engagement Score: ${attentionScore}/100
+
 ---
 ^^^ATTENTION METRICS DETAILED
+
 Dwell Time: ${dwellTime}s | Scroll Depth: ${scrollDepth}%
 Mouse Movements: ${mouseMovements} | Eye Tracking: Active
 Emotional Response: ${emotionalScore} | Attention Score: ${attentionScore}/100
+
 ---
 ^^^DEMOGRAPHIC INFERENCES
+
 Age Range: ${ageRange} | Income Level: ${incomeLevel}
 Political Leaning: ${politicalLeaning} | Location: ${['Urban', 'Suburban', 'Rural'][Math.floor(Math.random() * 3)]}
+
 ---
 ^^^TARGETED ADVERTISING OPPORTUNITIES
+
 ${selectedAds[0]} | High Priority
 ${selectedAds[1]} | Medium Priority  
 ${selectedAds[2]} | Medium Priority
 ${selectedAds[3]} | Low Priority
+
 ---
 ^^^DATA MONETIZATION BREAKDOWN
+
 Data Point: $0.001 | Profile Update: $0.005
 Behavioral Pattern: $0.003 | Demographic Data: $0.002
 Targeting Score: +${Math.floor(Math.random() * 15) + 3} | Total Value: $0.011
+
 ---
 ^^^SURVEILLANCE NETWORK
+
 Facebook: Data Shared | Google: Analytics Active
 Amazon: Purchase History | Twitter: Sentiment Analysis
+
 ---
 ^^^PREDICTIVE MODELING
+
 Next Purchase: ${['Electronics', 'Clothing', 'Food', 'Services'][Math.floor(Math.random() * 4)]} | Likely Spending: $${(Math.random() * 500 + 50).toFixed(0)}
 Conversion Probability: ${(Math.random() * 0.4 + 0.1).toFixed(1)}% | Targeting Success: ${(Math.random() * 0.8 + 0.2).toFixed(1)}%
+
 ---
 ^^^PRIVACY INVASION METRICS
+
 Cookies Placed: ${Math.floor(Math.random() * 15) + 8} | Trackers Active: ${Math.floor(Math.random() * 12) + 5}
 Data Brokers: ${Math.floor(Math.random() * 8) + 3} | Privacy Score: ${Math.floor(Math.random() * 30) + 10}/100
+
 ---
 ^^^TOTAL SURVEILLANCE VALUE | ^$${(Math.random() * 0.02 + 0.005).toFixed(3)}
 
