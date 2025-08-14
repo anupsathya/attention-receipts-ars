@@ -199,118 +199,89 @@ app.post('/api/print-receipt', async (req, res) => {
         const incomeLevel = ['Low', 'Medium', 'High', 'Premium'][Math.floor(Math.random() * 3)];
         const politicalLeaning = ['Conservative', 'Moderate', 'Liberal', 'Apolitical'][Math.floor(Math.random() * 4)];
         
-        const markdown = `{width: 48}
-{align: center}{bold}ATTENTION RECEIPT{/bold}
-{align: center}{invert}CLASSIFIED DOCUMENT{/invert}
-{align: center}${dateStr} | ${timeStr}{/align}
+        const markdown = `^^^ATTENTION RECEIPT
 
-{comment: Your behavior has been recorded and monetized}
-{comment: This receipt serves as proof of your digital surveillance}
-{comment: Your data has been sold to the highest bidder}
+${dateStr} | ${timeStr}
 
-{border: heavy}
-{align: center}{bold}TRACKING DETAILS{/bold}{/align}
-{border: light}
-ID: ${trackingId}
-Duration: ${Math.floor(Math.random() * 120) + 30}min
+Your behavior has been recorded and monetized
+This receipt serves as proof of your digital surveillance
+Your data has been sold to the highest bidder
 
-{border: double}
-{align: center}{invert}SURVEILLANCE DATA{/invert}{/align}
-{border: light}
-{underline}"${newsItem.title}"{/underline}
-Source: ${newsItem.source}
-Category: ${newsItem.category}
+^^^TRACKING DETAILS
+Tracking ID     | ${trackingId}
+Session Time    | ${Math.floor(Math.random() * 120) + 30}min
+---
 
-{border: heavy}
-{align: center}{bold}BEHAVIORAL ANALYSIS{/bold}{/align}
-{border: light}
-Status: {invert}${action === 'save' ? 'ENGAGEMENT' : 'REJECTION'}{/invert}
-Type: ${action === 'save' ? 'Positive' : 'Negative'}
-Score: {bold}${attentionScore}/100{/bold}
+^^^SURVEILLANCE DATA
+"${newsItem.title}"
+Source         | ${newsItem.source}
+Category       | ${newsItem.category}
+---
 
-{border: double}
-{align: center}{underline}ATTENTION METRICS{/underline}{/align}
-{border: light}
-{table}
-Metric | Value | Status
-Dwell Time | ${dwellTime}s | {bold}HIGH{/bold}
-Scroll Depth | ${scrollDepth}% | {bold}TRACKED{/bold}
-Movements | ${mouseMovements} | {bold}ACTIVE{/bold}
-{/table}
+^^^BEHAVIORAL ANALYSIS
+Status         | ${action === 'save' ? 'ENGAGEMENT' : 'REJECTION'}
+Type           | ${action === 'save' ? 'Positive' : 'Negative'}
+Score          | ${attentionScore}/100
+---
 
-{border: heavy}
-{align: center}{bold}DEMOGRAPHIC PROFILE{/bold}{/align}
-{border: light}
-{table}
-Age | ${ageRange}
-Income | ${incomeLevel}
-Politics | ${politicalLeaning}
-Location | ${['Urban', 'Suburban', 'Rural'][Math.floor(Math.random() * 3)]}
-{/table}
+^^^ATTENTION METRICS
+Dwell Time     | ${dwellTime}s
+Scroll Depth   | ${scrollDepth}%
+Mouse Moves    | ${mouseMovements}
+Eye Tracking   | Active
+Emotion Score  | ${emotionalScore}
+Attention      | ${attentionScore}/100
+---
 
-{border: double}
-{align: center}{invert}AD TARGETING{/invert}{/align}
-{border: light}
-{table}
-Category | Priority
-${selectedAds[0]} | {bold}HIGH{/bold}
-${selectedAds[1]} | MEDIUM
-${selectedAds[2]} | MEDIUM
-${selectedAds[3]} | LOW
-{/table}
+^^^DEMOGRAPHIC DATA
+Age Range      | ${ageRange}
+Income Level   | ${incomeLevel}
+Politics       | ${politicalLeaning}
+Location       | ${['Urban', 'Suburban', 'Rural'][Math.floor(Math.random() * 3)]}
+---
 
-{border: heavy}
-{align: center}{bold}DATA VALUE{/bold}{/align}
-{border: light}
-{table}
-Metric | Value
-Data Point | $0.001
-Profile | $0.005
-Behavior | $0.003
-Demographics | $0.002
-{/table}
-Score: +${Math.floor(Math.random() * 15) + 3}
-Total: {bold}$0.011{/bold}
+^^^AD TARGETING
+${selectedAds[0]}     | ^High Priority
+${selectedAds[1]}     | ^Medium Priority
+${selectedAds[2]}     | ^Medium Priority
+${selectedAds[3]}     | ^Low Priority
+---
 
-{border: double}
-{align: center}{underline}SURVEILLANCE NETWORK{/underline}{/align}
-{border: light}
-{table}
-Platform | Status
-Facebook | {bold}ACTIVE{/bold}
-Google | {bold}TRACKING{/bold}
-Amazon | {bold}PROFILING{/bold}
-Twitter | {bold}ANALYZING{/bold}
-{/table}
+^^^DATA VALUE
+Data Point     | ^$0.001
+Profile Update | ^$0.005
+Behavior Data  | ^$0.003
+Demographics   | ^$0.002
+Target Score   | ^+${Math.floor(Math.random() * 15) + 3}
+---
+^TOTAL VALUE   | ^$0.011
 
-{border: heavy}
-{align: center}{bold}PREDICTIVE MODEL{/bold}{/align}
-{border: light}
-Next Purchase: {bold}${['Electronics', 'Clothing', 'Food', 'Services'][Math.floor(Math.random() * 4)]}{/bold}
-Likely Spend: {bold}$${(Math.random() * 500 + 50).toFixed(0)}{/bold}
-Conversion: ${(Math.random() * 0.4 + 0.1).toFixed(1)}%
-Success Rate: ${(Math.random() * 0.8 + 0.2).toFixed(1)}%
+^^^NETWORK STATUS
+Facebook       | Data Shared
+Google         | Analytics Active
+Amazon         | Purchase History
+Twitter        | Sentiment Analysis
+---
 
-{border: double}
-{align: center}{invert}PRIVACY METRICS{/invert}{/align}
-{border: light}
-{table}
-Metric | Count | Risk
-Cookies | ${Math.floor(Math.random() * 15) + 8} | {bold}HIGH{/bold}
-Trackers | ${Math.floor(Math.random() * 12) + 5} | {bold}HIGH{/bold}
-Brokers | ${Math.floor(Math.random() * 8) + 3} | {bold}HIGH{/bold}
-{/table}
-Privacy Score: {invert}${Math.floor(Math.random() * 30) + 10}/100{/invert}
+^^^PREDICTIVE MODEL
+Next Purchase  | ${['Electronics', 'Clothing', 'Food', 'Services'][Math.floor(Math.random() * 4)]}
+Likely Spend   | ^$${(Math.random() * 500 + 50).toFixed(0)}
+Conversion     | ^${(Math.random() * 0.4 + 0.1).toFixed(1)}%
+Success Rate   | ^${(Math.random() * 0.8 + 0.2).toFixed(1)}%
+---
 
-{border: heavy}
-{align: center}{bold}TOTAL VALUE{/bold}{/align}
-{align: center}{invert}$${(Math.random() * 0.02 + 0.005).toFixed(3)}{/invert}
-{border: double}
+^^^PRIVACY METRICS
+Cookies        | ${Math.floor(Math.random() * 15) + 8} Active
+Trackers       | ${Math.floor(Math.random() * 12) + 5} Running
+Data Brokers   | ${Math.floor(Math.random() * 8) + 3} Connected
+Privacy Score  | ${Math.floor(Math.random() * 30) + 10}/100
+---
 
-{align: center}{bold}NOTICE{/bold}{/align}
-{comment: Your digital footprint has been permanently recorded}
-{comment: This data will be used to manipulate your future decisions}
-{comment: Resistance is futile - you are the product}`;
+^^^TOTAL SURVEILLANCE VALUE | ^$${(Math.random() * 0.02 + 0.005).toFixed(3)}
+
+Your digital footprint has been permanently recorded
+This data will be used to manipulate your future decisions
+Resistance is futile - you are the product`;
 
         // Print receipt
         try {
