@@ -191,7 +191,12 @@ app.post('/api/print-receipt', async (req, res) => {
         const attentionScore = Math.floor(Math.random() * 100) + 25;
         
         // Generate targeted advertising suggestions
-        const adCategories = ['Luxury Cars', 'Investment Apps', 'Weight Loss', 'Dating Sites', 'Gaming', 'Travel', 'Fashion', 'Tech Gadgets'];
+        const adCategories = [
+            'Luxury Cars', 'Investment Apps', 'Weight Loss', 'Dating Sites', 'Gaming', 'Travel', 'Fashion', 'Tech Gadgets',
+            'Mental Health Apps', 'Sleep Aids', 'Anxiety Medication', 'Financial Planning', 'Life Insurance',
+            'Home Security', 'Privacy VPNs', 'Stress Relief', 'Career Coaching', 'Self-Help Books',
+            'Meditation Apps', 'Therapy Services', 'Fitness Tracking', 'Social Media Management'
+        ];
         const selectedAds = adCategories.sort(() => 0.5 - Math.random()).slice(0, 4);
         
         // Generate creepy demographic inferences
@@ -200,88 +205,102 @@ app.post('/api/print-receipt', async (req, res) => {
         const politicalLeaning = ['Conservative', 'Moderate', 'Liberal', 'Apolitical'][Math.floor(Math.random() * 4)];
         
         const markdown = `^^^ATTENTION RECEIPT
-
+{text:wide}SURVEILLANCE RECORD{text:normal}
 ${dateStr} | ${timeStr}
+Session ID: ${trackingId}
 
-Your behavior has been recorded and monetized
-This receipt serves as proof of your digital surveillance
-Your data has been sold to the highest bidder
+^^Notice
+Your digital existence has been processed
+Your consciousness has been quantified
+Your future behaviors will be optimized
+Your reality is now our product
 
-^^Tracking Details
-Tracking ID     | ${trackingId}
-Session Time    | ${Math.floor(Math.random() * 120) + 30}min
----
+^^Psychological Profile
+Emotional State   | ${emotionalScore > 0.5 ? 'Vulnerable' : 'Resistant'}
+Suggestibility    | ${(Math.random() * 100).toFixed(0)}%
+Anxiety Level    | ${Math.floor(Math.random() * 100)}%
+Sleep Quality    | ${['Poor', 'Irregular', 'Monitored'][Math.floor(Math.random() * 3)]}
+Mental State     | ${['Fatigued', 'Stressed', 'Distracted', 'Susceptible'][Math.floor(Math.random() * 4)]}
 
-^^Surveillance Data
+^^Digital Shadow
+Device ID        | ${trackingId}
+Session Length   | ${Math.floor(Math.random() * 120) + 30}min
+IP Address      | ${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.x.x
+Browser History | ${Math.floor(Math.random() * 1000) + 500} pages indexed
+Search Patterns | ${['Concerning', 'Predictable', 'Valuable'][Math.floor(Math.random() * 3)]}
+
+^^Content Interaction
 "${newsItem.title}"
-Source         | ${newsItem.source}
-Category       | ${newsItem.category}
+Source          | ${newsItem.source}
+Category        | ${newsItem.category}
+Engagement      | ${action === 'save' ? 'CAPTURED' : 'NOTED'}
+Interest Vector | ${['Politics', 'Technology', 'Health', 'Finance'][Math.floor(Math.random() * 4)]}
+
+^^Behavioral Metrics
+Attention Span  | ${dwellTime}s (${dwellTime > 20 ? 'Above Average' : 'Below Average'})
+Scroll Pattern  | ${scrollDepth}% (${['Anxious', 'Thorough', 'Skimming'][Math.floor(Math.random() * 3)]})
+Mouse Movement  | ${mouseMovements} (${mouseMovements > 100 ? 'Agitated' : 'Focused'})
+Eye Tracking    | ${['Fixated', 'Scanning', 'Avoiding'][Math.floor(Math.random() * 3)]}
+Focus Score     | ${attentionScore}/100
+
+^^Demographic Analysis
+Age Bracket     | ${ageRange} (${Math.floor(Math.random() * 99)}% confidence)
+Income Range    | ${incomeLevel} (Spending patterns analyzed)
+Political Bias  | ${politicalLeaning} (Based on content affinity)
+Location        | ${['Urban', 'Suburban', 'Rural'][Math.floor(Math.random() * 3)]} Zone
+Social Class    | ${['Aspirational', 'Struggling', 'Comfortable', 'Elite'][Math.floor(Math.random() * 4)]}
+Influence Level | ${Math.floor(Math.random() * 100)}/100
+
+^^Vulnerability Assessment
+Financial Stress   | ${Math.floor(Math.random() * 100)}%
+Career Anxiety    | ${Math.floor(Math.random() * 100)}%
+Health Concerns   | ${Math.floor(Math.random() * 100)}%
+Social Pressure   | ${Math.floor(Math.random() * 100)}%
+FOMO Index        | ${Math.floor(Math.random() * 100)}%
+
+^^Targeted Solutions
+${selectedAds[0]}      | ^Immediate Need Detected
+${selectedAds[1]}      | ^High Vulnerability Match
+${selectedAds[2]}      | ^Emotional Trigger Point
+${selectedAds[3]}      | ^Exploitable Interest
 ---
+Additional Vectors:
+${adCategories[Math.floor(Math.random() * adCategories.length)]} | ^${Math.floor(Math.random() * 100)}% Match
+${adCategories[Math.floor(Math.random() * adCategories.length)]} | ^${Math.floor(Math.random() * 100)}% Match
 
-^^Behavioral Analysis
-Status         | ${action === 'save' ? 'ENGAGEMENT' : 'REJECTION'}
-Type           | ${action === 'save' ? 'Positive' : 'Negative'}
-Score          | ${attentionScore}/100
+^^Surveillance Network
+Facebook        | ${['Data Harvested', 'Profile Analyzed', 'Connections Mapped'][Math.floor(Math.random() * 3)]}
+Google          | ${['Search Patterns Indexed', 'Email Contents Scanned', 'Location Tracked'][Math.floor(Math.random() * 3)]}
+Amazon          | ${['Purchase History Analyzed', 'Wishlist Profiled', 'Browse Pattern Recorded'][Math.floor(Math.random() * 3)]}
+Twitter         | ${['Sentiment Analyzed', 'Network Mapped', 'Influence Calculated'][Math.floor(Math.random() * 3)]}
+Banking Apps    | ${['Transactions Monitored', 'Spending Analyzed', 'Financial Status Tracked'][Math.floor(Math.random() * 3)]}
+Health Apps     | ${['Biometrics Recorded', 'Sleep Patterns Monitored', 'Stress Levels Tracked'][Math.floor(Math.random() * 3)]}
+
+^^Predictive Analytics
+Next Purchase   | ${['Electronics', 'Clothing', 'Food', 'Services'][Math.floor(Math.random() * 4)]}
+Price Tolerance | ^$${(Math.random() * 500 + 50).toFixed(0)}
+Conversion Rate | ^${(Math.random() * 0.4 + 0.1).toFixed(1)}%
+Manipulation    | ^${(Math.random() * 0.8 + 0.2).toFixed(1)}% Effective
+
+^^Privacy Compromise
+Active Cookies   | ${Math.floor(Math.random() * 15) + 8} (${Math.floor(Math.random() * 100)}% Tracking)
+Live Trackers    | ${Math.floor(Math.random() * 12) + 5} (${Math.floor(Math.random() * 100)}% Active)
+Data Brokers     | ${Math.floor(Math.random() * 8) + 3} (${Math.floor(Math.random() * 100)}% Selling)
+Privacy Score    | ${Math.floor(Math.random() * 30) + 10}/100 (Critically Low)
+
+^^Monetization Summary
+Raw Data Value   | ^$${(Math.random() * 0.01).toFixed(3)}
+Profile Worth    | ^$${(Math.random() * 0.02).toFixed(3)}
+Behavior Value   | ^$${(Math.random() * 0.03).toFixed(3)}
+Prediction Value | ^$${(Math.random() * 0.04).toFixed(3)}
 ---
+^*Total Human Capital Value* | ^$${(Math.random() * 0.1).toFixed(3)}
 
-^^Attention Metrics
-Dwell Time     | ${dwellTime}s
-Scroll Depth   | ${scrollDepth}%
-Mouse Moves    | ${mouseMovements}
-Eye Tracking   | Active
-Emotion Score  | ${emotionalScore}
-Attention      | ${attentionScore}/100
----
-
-^^Demographic Data
-Age Range      | ${ageRange}
-Income Level   | ${incomeLevel}
-Politics       | ${politicalLeaning}
-Location       | ${['Urban', 'Suburban', 'Rural'][Math.floor(Math.random() * 3)]}
----
-
-^^Ad Targeting
-${selectedAds[0]}     | ^High Priority
-${selectedAds[1]}     | ^Medium Priority
-${selectedAds[2]}     | ^Medium Priority
-${selectedAds[3]}     | ^Low Priority
----
-
-^^Data Value
-Data Point     | ^$0.001
-Profile Update | ^$0.005
-Behavior Data  | ^$0.003
-Demographics   | ^$0.002
-Target Score   | ^+${Math.floor(Math.random() * 15) + 3}
----
-^TOTAL VALUE   | ^$0.011
-
-^^Network Status
-Facebook       | Data Shared
-Google         | Analytics Active
-Amazon         | Purchase History
-Twitter        | Sentiment Analysis
----
-
-^^Predictive Model
-Next Purchase  | ${['Electronics', 'Clothing', 'Food', 'Services'][Math.floor(Math.random() * 4)]}
-Likely Spend   | ^$${(Math.random() * 500 + 50).toFixed(0)}
-Conversion     | ^${(Math.random() * 0.4 + 0.1).toFixed(1)}%
-Success Rate   | ^${(Math.random() * 0.8 + 0.2).toFixed(1)}%
----
-
-^^Privacy Metrics
-Cookies        | ${Math.floor(Math.random() * 15) + 8} Active
-Trackers       | ${Math.floor(Math.random() * 12) + 5} Running
-Data Brokers   | ${Math.floor(Math.random() * 8) + 3} Connected
-Privacy Score  | ${Math.floor(Math.random() * 30) + 10}/100
----
-
-^*Total Surveillance Value* | ^$${(Math.random() * 0.02 + 0.005).toFixed(3)}
-
-Your digital footprint has been permanently recorded
-This data will be used to manipulate your future decisions
-Resistance is futile - you are the product`;
+{text:wide}NOTICE{text:normal}
+Your existence has been successfully commodified
+Your future behaviors have been predetermined
+Your choices are now optimized for monetization
+Resistance only improves our prediction models`;
 
         // Print receipt
         try {
