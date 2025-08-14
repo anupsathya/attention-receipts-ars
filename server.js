@@ -1,6 +1,7 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const receiptio = require('receiptio');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -163,6 +164,59 @@ app.get('/api/news/:id', (req, res) => {
         
         res.json(row);
     });
+});
+
+// Receipt printing endpoint
+app.post('/api/print-receipt', async (req, res) => {
+    try {
+        const { newsItem, action } = req.body;
+        
+        if (!newsItem) {
+            return res.status(400).json({ error: 'News item is required' });
+        }
+        
+        // Create receipt markdown
+        const now = new Date();
+        const dateStr = now.toLocaleDateString();
+        const timeStr = now.toLocaleTimeString();
+        
+        const markdown = `^^^RECEIPT
+
+${dateStr}, ${timeStr}
+${newsItem.title}
+${newsItem.source} | ${newsItem.category}
+---
+${action === 'save' ? 'SAVED' : 'SKIPPED'} | ${newsItem.category}
+^TOTAL | ^${action === 'save' ? 'SAVED' : 'SKIPPED'}`;
+
+        // Print receipt
+        try {
+            const result = await receiptio.print(markdown, '-d /dev/usb/lp0');
+            
+            res.json({ 
+                success: true, 
+                message: 'Receipt printed successfully',
+                result: result 
+            });
+        } catch (printError) {
+            // If printer is not available, still return success but with a warning
+            console.warn('Printer not available, but receipt format generated:', printError.message);
+            
+            res.json({ 
+                success: true, 
+                message: 'Receipt format generated (printer not available)',
+                result: { markdown: markdown },
+                warning: 'Printer not available'
+            });
+        }
+        
+    } catch (error) {
+        console.error('Receipt printing error:', error);
+        res.status(500).json({ 
+            error: 'Failed to print receipt',
+            details: error.message 
+        });
+    }
 });
 
 // Start server

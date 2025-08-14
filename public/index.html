@@ -21,12 +21,25 @@
             <p>Swipe left to skip • Swipe right to save</p>
             <!-- <p>Or use the buttons below</p> -->
         </div>
+        
+        <div class="receipt-toggle">
+            <label class="toggle-label">
+                <input type="checkbox" id="receiptToggle" checked>
+                <span class="toggle-text">Print Receipts</span>
+            </label>
+        </div>
 
         <div class="swipe-buttons">
             <button class="swipe-btn" id="skipBtn">Skip</button>
             <button class="swipe-btn" id="saveBtn">Save</button>
         </button>
     </div>
+    
+    <!-- Receipt printing notification -->
+    <div id="receiptNotification" class="receipt-notification" style="display: none;">
+        <span id="receiptMessage">Printing receipt...</span>
+    </div>
+    
     <script src="js/news.js"></script>
 </body>
 </html>
