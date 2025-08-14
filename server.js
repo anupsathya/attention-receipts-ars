@@ -183,12 +183,23 @@ app.post('/api/print-receipt', async (req, res) => {
         // Generate creepy tracking ID
         const trackingId = `ATT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
         
-        // Generate creepy behavioral data
-        const dwellTime = Math.floor(Math.random() * 45) + 8;
-        const scrollDepth = Math.floor(Math.random() * 100) + 15;
-        const mouseMovements = Math.floor(Math.random() * 200) + 50;
-        const emotionalScore = (Math.random() * 0.8 + 0.2).toFixed(2);
-        const attentionScore = Math.floor(Math.random() * 100) + 25;
+        // Generate creepy behavioral data with correlated values
+        const dwellTime = Math.floor(Math.random() * 45) + 8; // 8-53 seconds
+        const scrollDepth = Math.min(100, Math.floor((dwellTime * 2.5) + (Math.random() * 20))); // Correlates with dwell time
+        const mouseMovements = Math.floor(dwellTime * 4 + (Math.random() * 50)); // ~4 movements per second + random
+        
+        // Emotional score influenced by dwell time and scroll depth
+        const baseEmotionalScore = (dwellTime / 53) * 0.6 + (scrollDepth / 100) * 0.4;
+        const emotionalScore = Math.min(1, (baseEmotionalScore + (Math.random() * 0.2)).toFixed(2));
+        
+        // Attention score based on all previous metrics
+        const rawAttentionScore = (
+            (dwellTime / 53) * 25 +           // Max 25 points from dwell time
+            (scrollDepth / 100) * 35 +        // Max 35 points from scroll depth
+            (mouseMovements / 250) * 20 +     // Max 20 points from mouse activity
+            (baseEmotionalScore * 20)         // Max 20 points from emotional engagement
+        );
+        const attentionScore = Math.min(100, Math.floor(rawAttentionScore));
         
         // Generate targeted advertising suggestions
         const adCategories = [
@@ -252,11 +263,11 @@ Social Class    | ${['Aspirational', 'Struggling', 'Comfortable', 'Elite'][Math.
 Influence Level | ${Math.floor(Math.random() * 100)}/100
 
 ^^Vulnerability Assessment
-Financial Stress   | ${Math.floor(Math.random() * 100)}%
-Career Anxiety    | ${Math.floor(Math.random() * 100)}%
-Health Concerns   | ${Math.floor(Math.random() * 100)}%
-Social Pressure   | ${Math.floor(Math.random() * 100)}%
-FOMO Index        | ${Math.floor(Math.random() * 100)}%
+Financial Stress   | ${Math.min(100, Math.floor(emotionalScore * 80 + dwellTime))}%
+Career Anxiety    | ${Math.min(100, Math.floor(attentionScore * 0.8 + scrollDepth * 0.2))}%
+Health Concerns   | ${Math.min(100, Math.floor(mouseMovements / 3))}%
+Social Pressure   | ${Math.min(100, Math.floor(emotionalScore * 100))}%
+FOMO Index        | ${Math.min(100, Math.floor((attentionScore + scrollDepth) / 2))}%
 
 ^^Targeted Solutions
 ${selectedAds[0]}      | ^Immediate Need Detected
@@ -289,12 +300,15 @@ Data Brokers     | ${Math.floor(Math.random() * 8) + 3} (${Math.floor(Math.rando
 Privacy Score    | ${Math.floor(Math.random() * 30) + 10}/100 (Critically Low)
 
 ^^Monetization Summary
-Raw Data Value   | ^$${(Math.random() * 0.01).toFixed(3)}
-Profile Worth    | ^$${(Math.random() * 0.02).toFixed(3)}
-Behavior Value   | ^$${(Math.random() * 0.03).toFixed(3)}
-Prediction Value | ^$${(Math.random() * 0.04).toFixed(3)}
+Raw Data Value   | ^$${(0.001 * (mouseMovements / 100)).toFixed(3)}
+Profile Worth    | ^$${(0.002 * (attentionScore / 50)).toFixed(3)}
+Behavior Value   | ^$${(0.003 * emotionalScore).toFixed(3)}
+Prediction Value | ^$${(0.004 * (scrollDepth / 50)).toFixed(3)}
 ---
-^*Total Human Capital Value* | ^$${(Math.random() * 0.1).toFixed(3)}
+^*Total Human Capital Value* | ^$${((0.001 * (mouseMovements / 100) + 
+                                    0.002 * (attentionScore / 50) + 
+                                    0.003 * emotionalScore + 
+                                    0.004 * (scrollDepth / 50))).toFixed(3)}
 
 {text:wide}NOTICE{text:normal}
 Your existence has been successfully commodified
