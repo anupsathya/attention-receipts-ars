@@ -185,7 +185,6 @@ app.post('/api/print-receipt', async (req, res) => {
         
         const markdown = `^^^ATTENTION RECEIPT
 
-{width: * 42}
 {comment: Your behavior has been recorded and monetized}
 
 ${dateStr} | ${timeStr}
