@@ -199,82 +199,124 @@ app.post('/api/print-receipt', async (req, res) => {
         const incomeLevel = ['Low', 'Medium', 'High', 'Premium'][Math.floor(Math.random() * 3)];
         const politicalLeaning = ['Conservative', 'Moderate', 'Liberal', 'Apolitical'][Math.floor(Math.random() * 4)];
         
-        const markdown = `^^^ATTENTION RECEIPT
+        const markdown = `^^^| ATTENTION RECEIPT |
 
 {comment: Your behavior has been recorded and monetized}
 {comment: This receipt serves as proof of your digital surveillance}
 {comment: Your data has been sold to the highest bidder}
 
-${dateStr} | ${timeStr}
+{align:center}"⚠️  SURVEILLANCE ACTIVE ⚠️"
 
-Tracking ID: ${trackingId}
-Session Duration: ${Math.floor(Math.random() * 120) + 30}min
-
----
-^^^SURVEILLANCE DATA COLLECTED
-
-${newsItem.title}
-${newsItem.source} | ${newsItem.category}
+{align:center}📅 ${dateStr}
+{align:center}🕐 ${timeStr}
 
 ---
-^^^BEHAVIORAL PATTERN ANALYSIS
 
-${action === 'save' ? 'ENGAGEMENT' : 'REJECTION'} | ${newsItem.category}
-Interaction Type: ${action === 'save' ? 'Positive' : 'Negative'}
-Engagement Score: ${attentionScore}/100
+🔍 Tracking ID: | ${trackingId}
+⏱️  Session Duration: | ${Math.floor(Math.random() * 120) + 30}min
 
----
-^^^ATTENTION METRICS DETAILED
+===
 
-Dwell Time: ${dwellTime}s | Scroll Depth: ${scrollDepth}%
-Mouse Movements: ${mouseMovements} | Eye Tracking: Active
-Emotional Response: ${emotionalScore} | Attention Score: ${attentionScore}/100
+^^"SURVEILLANCE DATA COLLECTED"
 
----
-^^^DEMOGRAPHIC INFERENCES
-
-Age Range: ${ageRange} | Income Level: ${incomeLevel}
-Political Leaning: ${politicalLeaning} | Location: ${['Urban', 'Suburban', 'Rural'][Math.floor(Math.random() * 3)]}
+_"${newsItem.title}"_
+📍 Source: ${newsItem.source} |
+🏷️  Category: ${newsItem.category} |
 
 ---
-^^^TARGETED ADVERTISING OPPORTUNITIES
 
-${selectedAds[0]} | High Priority
-${selectedAds[1]} | Medium Priority  
-${selectedAds[2]} | Medium Priority
-${selectedAds[3]} | Low Priority
+^^"BEHAVIORAL ANALYSIS"
 
----
-^^^DATA MONETIZATION BREAKDOWN
-
-Data Point: $0.001 | Profile Update: $0.005
-Behavioral Pattern: $0.003 | Demographic Data: $0.002
-Targeting Score: +${Math.floor(Math.random() * 15) + 3} | Total Value: $0.011
+${action === 'save' ? '✅ ENGAGEMENT DETECTED' : '❌ REJECTION DETECTED'} |
+📊 Content Type: ${newsItem.category} |
+🎯 Interaction: ${action === 'save' ? 'POSITIVE' : 'NEGATIVE'} |
+⭐ Score: | ${attentionScore}/100
 
 ---
-^^^SURVEILLANCE NETWORK
 
-Facebook: Data Shared | Google: Analytics Active
-Amazon: Purchase History | Twitter: Sentiment Analysis
+^"ATTENTION METRICS"
+
+👁️  Dwell Time: | ${dwellTime}s
+📏 Scroll Depth: | ${scrollDepth}%
+🖱️  Mouse Moves: | ${mouseMovements}
+👀 Eye Track: | ACTIVE
+😊 Emotion: | ${emotionalScore}
+🎯 Attention: | ${attentionScore}/100
+
+===
+
+^"DEMOGRAPHIC PROFILE"
+
+👤 Age Range: | ${ageRange}
+💵 Income Level: | ${incomeLevel}
+🗳️  Politics: | ${politicalLeaning}
+🏘️  Location: | ${['Urban', 'Suburban', 'Rural'][Math.floor(Math.random() * 3)]}
 
 ---
-^^^PREDICTIVE MODELING
 
-Next Purchase: ${['Electronics', 'Clothing', 'Food', 'Services'][Math.floor(Math.random() * 4)]} | Likely Spending: $${(Math.random() * 500 + 50).toFixed(0)}
-Conversion Probability: ${(Math.random() * 0.4 + 0.1).toFixed(1)}% | Targeting Success: ${(Math.random() * 0.8 + 0.2).toFixed(1)}%
+"ADVERTISING TARGETS"
+
+🚗 ${selectedAds[0]} | ⭐⭐⭐⭐⭐
+📱 ${selectedAds[1]} | ⭐⭐⭐⭐
+🎮 ${selectedAds[2]} | ⭐⭐⭐
+✈️  ${selectedAds[3]} | ⭐⭐
+
+===
+
+^"DATA MONETIZATION"
+
+💾 Data Point: | $0.001
+🔄 Profile Update: | $0.005
+🧠 Behavioral: | $0.003
+👥 Demographic: | $0.002
+
+🎯 Targeting Bonus: | +${Math.floor(Math.random() * 15) + 3}
+"TOTAL VALUE:" | "$0.011"
 
 ---
-^^^PRIVACY INVASION METRICS
 
-Cookies Placed: ${Math.floor(Math.random() * 15) + 8} | Trackers Active: ${Math.floor(Math.random() * 12) + 5}
-Data Brokers: ${Math.floor(Math.random() * 8) + 3} | Privacy Score: ${Math.floor(Math.random() * 30) + 10}/100
+`SURVEILLANCE NETWORK`
+
+📘 Facebook: | SHARED
+🔍 Google: | ACTIVE
+📦 Amazon: | HISTORY
+🐦 Twitter: | SENTIMENT
+
+===
+
+"PREDICTIVE MODELING"
+
+🛒 Next Purchase:
+   ${['Electronics', 'Clothing', 'Food', 'Services'][Math.floor(Math.random() * 4)]}
+
+💸 Likely Spending: | $${(Math.random() * 500 + 50).toFixed(0)}
+📈 Conversion Rate: | ${(Math.random() * 0.4 + 0.1).toFixed(1)}%
+🎯 Success Rate: | ${(Math.random() * 0.8 + 0.2).toFixed(1)}%
 
 ---
-^^^TOTAL SURVEILLANCE VALUE | ^$${(Math.random() * 0.02 + 0.005).toFixed(3)}
 
-{comment: Your digital footprint has been permanently recorded}
-{comment: This data will be used to manipulate your future decisions}
-{comment: Resistance is futile - you are the product}`;
+_PRIVACY INVASION METRICS_
+
+🍪 Cookies Placed: | ${Math.floor(Math.random() * 15) + 8}
+📡 Active Trackers: | ${Math.floor(Math.random() * 12) + 5}
+🏢 Data Brokers: | ${Math.floor(Math.random() * 8) + 3}
+🛡️  Privacy Score: | ${Math.floor(Math.random() * 30) + 10}/100
+
+===
+
+^^^| TOTAL VALUE |
+^^^| $${(Math.random() * 0.02 + 0.005).toFixed(3)} |
+
+===
+
+{comment: Your digital footprint is permanently recorded}
+{comment: This data will manipulate your future decisions}
+{comment: Resistance is futile - you are the product}
+
+{align:center}_Thank you for your data_
+{align:center}`END SURVEILLANCE RECEIPT`
+
+===`;
 
         // Print receipt
         try {
