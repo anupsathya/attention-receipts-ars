@@ -285,7 +285,7 @@ Resistance is futile - you are the product`;
 
         // Print receipt
         try {
-            const result = await receiptio.print(markdown, '-d /dev/usb/lp0 -g 2.0');
+            const result = await receiptio.print(markdown, '-d /dev/usb/lp0 -u');
             
             res.json({ 
                 success: true, 
