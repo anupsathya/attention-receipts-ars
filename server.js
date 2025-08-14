@@ -175,19 +175,44 @@ app.post('/api/print-receipt', async (req, res) => {
             return res.status(400).json({ error: 'News item is required' });
         }
         
-        // Create receipt markdown
+        // Create creepy attention receipt markdown
         const now = new Date();
         const dateStr = now.toLocaleDateString();
         const timeStr = now.toLocaleTimeString();
         
-        const markdown = `^^^RECEIPT
+        // Generate creepy tracking ID
+        const trackingId = `ATT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
+        
+        const markdown = `^^^ATTENTION RECEIPT
 
-${dateStr}, ${timeStr}
+{width: * 42}
+{comment: Your behavior has been recorded and monetized}
+
+${dateStr} | ${timeStr}
+Tracking ID: ${trackingId}
+---
+^SURVEILLANCE DATA COLLECTED
 ${newsItem.title}
 ${newsItem.source} | ${newsItem.category}
 ---
-${action === 'save' ? 'SAVED' : 'SKIPPED'} | ${newsItem.category}
-^TOTAL | ^${action === 'save' ? 'SAVED' : 'SKIPPED'}`;
+^BEHAVIORAL PATTERN DETECTED
+${action === 'save' ? 'ENGAGEMENT' : 'REJECTION'} | ${newsItem.category}
+---
+^ATTENTION METRICS
+Dwell Time: ${Math.floor(Math.random() * 30) + 5}s
+Eye Movement: Tracked
+Emotional Response: Analyzed
+Mouse Position: Logged
+---
+^MONETIZATION VALUE
+Data Point: $0.001
+Profile Update: $0.005
+Targeting Score: +${Math.floor(Math.random() * 10) + 1}
+---
+^TOTAL SURVEILLANCE | ^$${(Math.random() * 0.01).toFixed(3)}
+
+{comment: This receipt serves as proof of your digital surveillance}
+{comment: Your data has been sold to the highest bidder}`;
 
         // Print receipt
         try {
