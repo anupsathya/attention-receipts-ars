@@ -147,27 +147,7 @@ body {
     margin-bottom: 5px;
 }
 
-.receipt-toggle {
-    text-align: center;
-    margin: 15px 0;
-}
 
-.toggle-label {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    color: white;
-    opacity: 0.9;
-}
-
-.toggle-label input[type="checkbox"] {
-    margin-right: 8px;
-    transform: scale(1.2);
-}
-
-.toggle-text {
-    font-size: 0.9rem;
-}
 
 .loading {
     text-align: center;
@@ -229,47 +209,3 @@ body {
     }
 }
 
-/* Receipt notification styles */
-.receipt-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #4CAF50;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 1000;
-    animation: slideInRight 0.3s ease;
-    max-width: 300px;
-}
-
-.receipt-notification.error {
-    background: #f44336;
-}
-
-.receipt-notification.success {
-    background: #4CAF50;
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOutRight {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
