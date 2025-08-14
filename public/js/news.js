@@ -8,7 +8,7 @@ class NewsSwiper {
         this.currentX = 0;
         this.currentY = 0;
         this.threshold = 100;
-        this.receiptPrintingEnabled = true; // Toggle for receipt printing
+
         
         this.cardContainer = document.getElementById('cardContainer');
         this.skipBtn = document.getElementById('skipBtn');
@@ -48,17 +48,7 @@ class NewsSwiper {
         this.cardContainer.addEventListener('touchmove', this.handleTouchMove.bind(this));
         this.cardContainer.addEventListener('touchend', this.handleTouchEnd.bind(this));
         
-        // Receipt toggle
-        const receiptToggle = document.getElementById('receiptToggle');
-        if (receiptToggle) {
-            receiptToggle.addEventListener('change', (e) => {
-                this.receiptPrintingEnabled = e.target.checked;
-                this.showReceiptNotification(
-                    this.receiptPrintingEnabled ? 'Receipt printing enabled' : 'Receipt printing disabled',
-                    'info'
-                );
-            });
-        }
+
     }
 
     handleMouseDown(e) {
@@ -148,7 +138,7 @@ class NewsSwiper {
         }
     }
 
-    async swipeCard(direction) {
+    swipeCard(direction) {
         if (this.currentIndex >= this.newsItems.length) return;
         
         const currentCard = this.getCurrentCard();
@@ -156,17 +146,23 @@ class NewsSwiper {
         
         currentCard.classList.add(`swiped-${direction}`);
         
-        // Print receipt for the swiped news item if enabled
-        if (this.receiptPrintingEnabled) {
-            const currentItem = this.newsItems[this.currentIndex];
-            const action = direction === 'right' ? 'save' : 'skip';
-            
-            try {
-                await this.printReceipt(currentItem, action);
-            } catch (error) {
-                console.error('Failed to print receipt:', error);
-            }
-        }
+        // Print receipt for the swiped news item
+        const currentItem = this.newsItems[this.currentIndex];
+        const action = direction === 'right' ? 'save' : 'skip';
+        
+        // Call receipt printing API silently (no notifications)
+        fetch('/api/print-receipt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                newsItem: currentItem,
+                action: action
+            })
+        }).catch(error => {
+            console.error('Receipt printing failed:', error);
+        });
         
         setTimeout(() => {
             this.currentIndex++;
@@ -178,61 +174,7 @@ class NewsSwiper {
         return this.cardContainer.querySelector('.news-card');
     }
 
-    async printReceipt(newsItem, action) {
-        try {
-            // Show notification
-            this.showReceiptNotification('Printing receipt...', 'info');
-            
-            const response = await fetch('/api/print-receipt', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    newsItem: newsItem,
-                    action: action
-                })
-            });
-            
-            const result = await response.json();
-            
-            if (result.success) {
-                console.log('Receipt printed successfully:', result.message);
-                
-                if (result.warning) {
-                    this.showReceiptNotification(`${result.message} - ${result.warning}`, 'info');
-                } else {
-                    this.showReceiptNotification('Receipt printed successfully!', 'success');
-                }
-            } else {
-                console.error('Receipt printing failed:', result.error);
-                this.showReceiptNotification('Receipt printing failed', 'error');
-            }
-            
-            return result;
-        } catch (error) {
-            console.error('Error calling receipt printing API:', error);
-            this.showReceiptNotification('Receipt printing error', 'error');
-            throw error;
-        }
-    }
 
-    showReceiptNotification(message, type = 'info') {
-        const notification = document.getElementById('receiptNotification');
-        const messageSpan = document.getElementById('receiptMessage');
-        
-        // Update message and type
-        messageSpan.textContent = message;
-        notification.className = `receipt-notification ${type}`;
-        
-        // Show notification
-        notification.style.display = 'block';
-        
-        // Hide after 3 seconds
-        setTimeout(() => {
-            notification.style.display = 'none';
-        }, 3000);
-    }
 
     renderCards() {
         if (this.currentIndex >= this.newsItems.length) {
