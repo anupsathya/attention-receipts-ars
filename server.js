@@ -207,24 +207,24 @@ Your behavior has been recorded and monetized
 This receipt serves as proof of your digital surveillance
 Your data has been sold to the highest bidder
 
-^^^TRACKING DETAILS
+^^Tracking Details
 Tracking ID     | ${trackingId}
 Session Time    | ${Math.floor(Math.random() * 120) + 30}min
 ---
 
-^^^SURVEILLANCE DATA
+^^Surveillance Data
 "${newsItem.title}"
 Source         | ${newsItem.source}
 Category       | ${newsItem.category}
 ---
 
-^^^BEHAVIORAL ANALYSIS
+^^Behavioral Analysis
 Status         | ${action === 'save' ? 'ENGAGEMENT' : 'REJECTION'}
 Type           | ${action === 'save' ? 'Positive' : 'Negative'}
 Score          | ${attentionScore}/100
 ---
 
-^^^ATTENTION METRICS
+^^Attention Metrics
 Dwell Time     | ${dwellTime}s
 Scroll Depth   | ${scrollDepth}%
 Mouse Moves    | ${mouseMovements}
@@ -233,21 +233,21 @@ Emotion Score  | ${emotionalScore}
 Attention      | ${attentionScore}/100
 ---
 
-^^^DEMOGRAPHIC DATA
+^^Demographic Data
 Age Range      | ${ageRange}
 Income Level   | ${incomeLevel}
 Politics       | ${politicalLeaning}
 Location       | ${['Urban', 'Suburban', 'Rural'][Math.floor(Math.random() * 3)]}
 ---
 
-^^^AD TARGETING
+^^Ad Targeting
 ${selectedAds[0]}     | ^High Priority
 ${selectedAds[1]}     | ^Medium Priority
 ${selectedAds[2]}     | ^Medium Priority
 ${selectedAds[3]}     | ^Low Priority
 ---
 
-^^^DATA VALUE
+^^Data Value
 Data Point     | ^$0.001
 Profile Update | ^$0.005
 Behavior Data  | ^$0.003
@@ -256,28 +256,28 @@ Target Score   | ^+${Math.floor(Math.random() * 15) + 3}
 ---
 ^TOTAL VALUE   | ^$0.011
 
-^^^NETWORK STATUS
+^^Network Status
 Facebook       | Data Shared
 Google         | Analytics Active
 Amazon         | Purchase History
 Twitter        | Sentiment Analysis
 ---
 
-^^^PREDICTIVE MODEL
+^^Predictive Model
 Next Purchase  | ${['Electronics', 'Clothing', 'Food', 'Services'][Math.floor(Math.random() * 4)]}
 Likely Spend   | ^$${(Math.random() * 500 + 50).toFixed(0)}
 Conversion     | ^${(Math.random() * 0.4 + 0.1).toFixed(1)}%
 Success Rate   | ^${(Math.random() * 0.8 + 0.2).toFixed(1)}%
 ---
 
-^^^PRIVACY METRICS
+^^Privacy Metrics
 Cookies        | ${Math.floor(Math.random() * 15) + 8} Active
 Trackers       | ${Math.floor(Math.random() * 12) + 5} Running
 Data Brokers   | ${Math.floor(Math.random() * 8) + 3} Connected
 Privacy Score  | ${Math.floor(Math.random() * 30) + 10}/100
 ---
 
-^^^TOTAL SURVEILLANCE VALUE | ^$${(Math.random() * 0.02 + 0.005).toFixed(3)}
+^*Total Surveillance Value* | ^$${(Math.random() * 0.02 + 0.005).toFixed(3)}
 
 Your digital footprint has been permanently recorded
 This data will be used to manipulate your future decisions
